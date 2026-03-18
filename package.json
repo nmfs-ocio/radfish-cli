@@ -1,5 +1,8 @@
 {
-  "name": "@nmfs-radfish/create-radfish-app",
+  "name": "@nmfs-ocio/create-radfish-app",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "version": "0.2.4",
   "description": "A cli tool for bootstrapping a radfish app",
   "engines": {
