@@ -1,0 +1,126 @@
+name: Publish @nmfs-ocio/create-radfish-app to GitHub Packages
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_type:
+        description: 'Version bump type'
+        required: true
+        type: choice
+        options:
+          - patch           # 0.2.4 → 0.2.5
+          - minor           # 0.2.4 → 0.3.0
+          - major           # 0.2.4 → 1.0.0
+          - prerelease      # 0.2.4-rc.1 → 0.2.4-rc.2
+          - prepatch        # 0.2.4 → 0.2.5-rc.1
+          - preminor        # 0.2.4 → 0.3.0-rc.1
+          - premajor        # 0.2.4 → 1.0.0-rc.1
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check admin permissions
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: { permission } } = await github.rest.repos.getCollaboratorPermissionLevel({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              username: context.actor
+            });
+
+            if (permission !== 'admin') {
+              core.setFailed(`User ${context.actor} does not have admin permissions. Current permission: ${permission}`);
+            }
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+
+      - name: Bump version (no git operations)
+        id: bump-version
+        run: |
+          set -e
+          npm version ${{ inputs.version_type }} --preid=rc --no-git-tag-version
+          NEW_VERSION=$(jq -r '.version' package.json)
+          echo "new_version=${NEW_VERSION}" >> $GITHUB_OUTPUT
+
+      - name: Publish to GitHub Packages
+        id: npm-publish
+        run: |
+          set -e
+          if [[ "${{ steps.bump-version.outputs.new_version }}" == *"-rc."* ]]; then
+            npm publish --tag beta
+          else
+            npm publish
+          fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit version bump
+        if: success()
+        run: |
+          set -e
+          git add package.json
+          git commit -m "chore(release): bump @nmfs-ocio/create-radfish-app to ${{ steps.bump-version.outputs.new_version }}"
+
+      - name: Create and push tags
+        if: success()
+        run: |
+          set -e
+          git tag "create-radfish-app@${{ steps.bump-version.outputs.new_version }}"
+          git push origin HEAD
+          if [[ "${{ steps.bump-version.outputs.new_version }}" == *"-rc."* ]]; then
+            git tag -f "create-radfish-app@beta"
+            git push origin "create-radfish-app@${{ steps.bump-version.outputs.new_version }}" "create-radfish-app@beta" --force
+          else
+            git tag -f "create-radfish-app@latest"
+            git push origin "create-radfish-app@${{ steps.bump-version.outputs.new_version }}" "create-radfish-app@latest" --force
+          fi
+
+      - name: Create GitHub Release
+        if: success()
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: "create-radfish-app@${{ steps.bump-version.outputs.new_version }}"
+          release_name: "create-radfish-app@${{ steps.bump-version.outputs.new_version }}"
+          body: |
+            Release of @nmfs-ocio/create-radfish-app version ${{ steps.bump-version.outputs.new_version }}
+
+            ## Changes
+            See [commit history](https://github.com/${{ github.repository }}/commits/create-radfish-app@${{ steps.bump-version.outputs.new_version }}) for detailed changes.
+          draft: false
+          prerelease: ${{ contains(steps.bump-version.outputs.new_version, '-rc.') }}
+
+      - name: Rollback version on failure
+        if: failure() && steps.bump-version.conclusion == 'success'
+        run: |
+          set -e
+          git checkout -- package.json
+          echo "Version bump rolled back due to publish failure"
