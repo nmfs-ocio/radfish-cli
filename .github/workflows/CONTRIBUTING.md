@@ -12,7 +12,7 @@ If you encounter any bugs, glitches, or unexpected behavior while using our soft
 
 ### How to Report a Bug:
 
-- Search through the [Project Roadmap](https://github.com/orgs/NMFS-RADFish/projects/2/views/3) or the Issues Log for that respective repo to ensure the bug hasn’t already been reported.
+- Search through the [Project Roadmap](https://github.com/orgs/nmfs-ocio/projects/1/views/3) or the Issues Log for that respective repo to ensure the bug hasn’t already been reported.
 - If it's a new bug, create a new issue using our **Bug Report Template**.
 - Provide as much detail as possible, including the steps to reproduce the bug, the version of the software, and any error messages.
 
@@ -82,7 +82,7 @@ Our documentation is an essential part of helping new users and contributors und
 
 We value your input and welcome ideas that could improve our product\! To ensure your feature request gets the attention it deserves, please follow the steps below. Providing detailed information will help us assess, prioritize, and potentially implement your idea more efficiently.
 
-- Search through the [Project Roadmap](https://github.com/orgs/NMFS-RADFish/projects/2/views/3) or the Issues Log for that respective repo to ensure the feature hasn’t already been requested.
+- Search through the [Project Roadmap](https://github.com/orgs/nmfs-ocio/projects/1/views/3) or the Issues Log for that respective repo to ensure the feature hasn’t already been requested.
 - If it's a new feature, create a new issue using our **Feature Request Template**.
 - Provide as much detail as possible to describe the feature.
 
@@ -122,7 +122,7 @@ If you would like to contribute in other ways (e.g., translations, community man
 
 If you want to propose a code change, here are the steps to submit a pull request:
 
-1. First, make sure there is an issue that describes the problem you are solving. Search the [Project Roadmap](https://github.com/orgs/NMFS-RADFish/projects/2/views/3) to find an existing issue. If none exists, create your own bug report or feature request.
+1. First, make sure there is an issue that describes the problem you are solving. Search the [Project Roadmap](https://github.com/orgs/nmfs-ocio/projects/1/views/3) to find an existing issue. If none exists, create your own bug report or feature request.
 2. Fork this repo into your GitHub account.
 3. Create a branch from directly from your issue submission. Use this branch to do your development.
 4. When your code changes are ready for review, open a pull request. Be sure to fill out all the applicable fields in the generated PR description.
@@ -141,7 +141,7 @@ We review bug reports and feature requests regularly. You can track progress by 
 
 ## 8\. Link to the Roadmap
 
-You can view our [Project Roadmap](https://github.com/orgs/NMFS-RADFish/projects/2/views/3). The roadmap outlines our upcoming priorities and major features, helping you understand what we're working on next.
+You can view our [Project Roadmap](https://github.com/orgs/nmfs-ocio/projects/1/views/3). The roadmap outlines our upcoming priorities and major features, helping you understand what we're working on next.
 
 ## 9\. Code of Conduct
 
@@ -151,4 +151,4 @@ We ask that all contributors adhere to our [Community Conduct](https://nmfs-radf
 
 This project is licensed under the [Apache License](https://opensource.org/license/apache-2-0/), Version 2.0. Please make sure that any contributions comply with this license. If you are submitting code or other contributions, you are agreeing to license your contributions under this same license.
 
-For external libraries or code used in the project, we provide attribution as necessary. If you believe an attribution is missing, please [open and issue](https://github.com/NMFS-RADFish/radfish/issues).
+For external libraries or code used in the project, we provide attribution as necessary. If you believe an attribution is missing, please [open and issue](https://github.com/nmfs-ocio/radfish-cli/issues).

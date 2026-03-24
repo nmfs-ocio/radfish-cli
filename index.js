@@ -32,7 +32,7 @@ let examples = [];
 function getExamples() {
   return new Promise((resolve, reject) => {
     const requestUrl = new URL(
-      "https://api.github.com/repos/nmfs-radfish/boilerplate/contents/examples",
+      "https://api.github.com/repos/nmfs-ocio/radfish-monorepo/contents/examples",
     );
     const options = {
       hostname: requestUrl.hostname,
@@ -118,7 +118,7 @@ async function scaffoldRadFishApp(projectDirectoryPath) {
 
       await new Promise((resolve, reject) => {
         downloadFile(
-          `https://api.github.com/repos/NMFS-RADFish/boilerplate/tarball/${encodeURIComponent(
+          `https://api.github.com/repos/nmfs-ocio/radfish-monorepo/tarball/${encodeURIComponent(
             ref,
           )}`,
           tarballFilePath,
