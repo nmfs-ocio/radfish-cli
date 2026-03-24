@@ -1,6 +1,6 @@
 # RADFish CLI
 
-![NPM Version](https://img.shields.io/npm/v/%40nmfs-radfish%2Fcreate-radfish-app)
+![Version](https://img.shields.io/github/package-json/v/nmfs-ocio/radfish-cli)
 ![test and build workflow](https://github.com/NMFS-RADFish/cli/actions/workflows/run-tests.yml/badge.svg)
 
 ![radfish_logo](https://github.com/NMFS-RADFish/boilerplate/assets/11274285/f0c1f78d-d2bd-4590-897c-c6ec87522dd1)
