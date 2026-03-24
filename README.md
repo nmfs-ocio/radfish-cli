@@ -1,9 +1,9 @@
 # RADFish CLI
 
 ![Version](https://img.shields.io/github/package-json/v/nmfs-ocio/radfish-cli)
-![test and build workflow](https://github.com/NMFS-RADFish/cli/actions/workflows/run-tests.yml/badge.svg)
+![test and build workflow](https://github.com/nmfs-ocio/radfish-cli/actions/workflows/run-tests.yml/badge.svg)
 
-![radfish_logo](https://github.com/NMFS-RADFish/boilerplate/assets/11274285/f0c1f78d-d2bd-4590-897c-c6ec87522dd1)
+![radfish_logo](https://github.com/nmfs-ocio/radfish-monorepo/assets/11274285/f0c1f78d-d2bd-4590-897c-c6ec87522dd1)
 
 # System Requirements
 
@@ -13,10 +13,10 @@
 # Creating a project
 
 ```
-npx @nmfs-radfish/create-radfish-app my-pwa
+npx @nmfs-ocio/create-radfish-app my-pwa
 ```
 
-Provide the cli the name of your new project. A new project will be created using the [default boilerplate template](https://github.com/NMFS-RADFish/boilerplate).
+Provide the cli the name of your new project. A new project will be created using the [default boilerplate template](https://github.com/nmfs-ocio/radfish-monorepo/tree/main/templates/react-javascript).
 
 # Contributing
 Thank you for considering contributing to this project! Contributions of all kinds are welcome, whether it’s bug reporting, feature requests, improving documentation, or submitting code. Before you get started, please take a moment to read through our [contribution guidelines](https://nmfs-radfish.github.io/radfish/about/contribute).
