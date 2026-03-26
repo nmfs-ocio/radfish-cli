@@ -39,16 +39,23 @@ jobs:
               core.setFailed(`User ${context.actor} does not have admin permissions. Current permission: ${permission}`);
             }
 
+      - name: Generate App Token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.RELEASE_BOT_APP_ID }}
+          private-key: ${{ secrets.RELEASE_BOT_PRIVATE_KEY }}
+
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           ref: ${{ github.ref }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ steps.app-token.outputs.token }}
 
       - name: Configure Git
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "Radfish-Release-Bot[bot]"
+          git config --global user.email "Radfish-Release-Bot[bot]@users.noreply.github.com"
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -109,7 +116,7 @@ jobs:
         if: success()
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
         with:
           tag_name: "create-radfish-app@${{ steps.bump-version.outputs.new_version }}"
           release_name: "create-radfish-app@${{ steps.bump-version.outputs.new_version }}"
