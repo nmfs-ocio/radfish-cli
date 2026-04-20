@@ -3,7 +3,7 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
-  "version": "0.2.5-rc.1",
+  "version": "0.2.5",
   "description": "A cli tool for bootstrapping a radfish app",
   "engines": {
     "node": ">=20"
